@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Form Result</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d") center/cover no-repeat;
+      backdrop-filter: blur(3px);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Glass card container */
+    .result-container {
+      width: 380px;
+      padding: 40px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Title */
+    h2 {
+      margin-bottom: 25px;
+      text-align: center;
+      color: #333;
+      font-size: 26px;
+      font-weight: 500;
+    }
+
+    /* Result text */
+    p {
+      margin-bottom: 15px;
+      font-size: 16px;
+      color: #333;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 15px;
+      border-radius: 8px;
+    }
+
+    /* Back link */
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #4b79a1, #283e51);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #395e79, #1d2e3a);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="result-container">
+    <h2>Data Recorded</h2>
+    <p><strong>Name:</strong>
+      <%= name %>
+    </p>
+    <p><strong>Email:</strong>
+      <%= email %>
+    </p>
+    <a href="/">Go Back</a>
+  </div>
+</body>
+
+</html>

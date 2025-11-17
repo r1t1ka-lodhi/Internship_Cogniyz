@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>User Form</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d") center/cover no-repeat;
+      backdrop-filter: blur(3px);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Glass card */
+    form {
+      width: 380px;
+      padding: 40px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Title */
+    h2 {
+      margin-bottom: 25px;
+      text-align: center;
+      color: #0b0a0a;
+      font-size: 26px;
+      font-weight: 500;
+    }
+
+    /* Input field style */
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      font-size: 16px;
+      color: #333;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    input::placeholder {
+      color: #666;
+    }
+
+    input:focus {
+      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Button */
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #4b79a1, #283e51);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #395e79, #1d2e3a);
+    }
+  </style>
+</head>
+
+<body>
+  <form action="/submit" method="POST">
+    <h2>User Input Form</h2>
+    <input type="text" name="name" placeholder="Enter your name" required />
+    <input type="email" name="email" placeholder="Enter your email" required />
+    <button type="submit">Submit</button>
+  </form>
+</body>
+
+</html>
