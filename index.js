@@ -17,11 +17,18 @@ app.get("/", (req, res) => {
   res.render("form");
 });
 app.post("/submit", (req, res) => {
-  const { name, email, password, department, gender, agree, message } = req.body;
+  const { firstName, middleName, lastName, email, password, confirmPassword, department, gender, agree, message } = req.body;
   
   if (!email.includes("@")) {
     return res.render("form", { error: "Invalid email format!" });
   }
+
+  if (password !== confirmPassword) {
+    return res.render("form", { error: "Passwords do not match!" });
+  }
+
+  // Combine name fields
+  const name = middleName ? `${firstName} ${middleName} ${lastName}` : `${firstName} ${lastName}`;
 
   submissions.push({ name, email, password, department, gender, message });
   res.render("result", { name, email, department, gender });
@@ -29,6 +36,23 @@ app.post("/submit", (req, res) => {
 
 app.get("/responses", (req, res) => {
   res.render("responses", { responses: submissions });
+});
+
+// SPA Route
+app.get("/spa", (req, res) => {
+  res.sendFile(path.join(__dirname, "Views", "spa.html"));
+});
+
+// API endpoint for SPA
+app.get("/api/responses", (req, res) => {
+  res.json(submissions);
+});
+
+app.post("/api/submit", (req, res) => {
+  const { firstName, lastName, email } = req.body;
+  const name = `${firstName} ${lastName}`;
+  submissions.push({ name, email, department: 'N/A', gender: 'N/A' });
+  res.json({ success: true, message: 'Form submitted successfully' });
 });
 
 app.post("/delete/:id", (req, res) => {

@@ -61,22 +61,53 @@
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            <div class="sm:col-span-2">
-              <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
-              <input id="name" name="name" type="text" placeholder="Enter your full name" required 
+            <div>
+              <label for="firstName" class="block text-sm font-semibold text-gray-700 mb-2">First Name *</label>
+              <input id="firstName" name="firstName" type="text" placeholder="Enter your first name" required oninput="validateField('firstName')" 
                      class="w-full px-4 py-3 border-2 border-gray-200 bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 hover:border-gray-300" style="font-family: 'Inter', sans-serif; clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);">
+              <div id="firstNameError" class="mt-1 text-sm text-red-500" style="display: none;"></div>
+            </div>
+
+            <div>
+              <label for="middleName" class="block text-sm font-semibold text-gray-700 mb-2">Middle Name</label>
+              <input id="middleName" name="middleName" type="text" placeholder="Enter your middle name (optional)" 
+                     class="w-full px-4 py-3 border-2 border-gray-200 bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 hover:border-gray-300" style="font-family: 'Inter', sans-serif; clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);">
+            </div>
+
+            <div class="sm:col-span-2">
+              <label for="lastName" class="block text-sm font-semibold text-gray-700 mb-2">Last Name *</label>
+              <input id="lastName" name="lastName" type="text" placeholder="Enter your last name" required oninput="validateField('lastName')" 
+                     class="w-full px-4 py-3 border-2 border-gray-200 bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 hover:border-gray-300" style="font-family: 'Inter', sans-serif; clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);">
+              <div id="lastNameError" class="mt-1 text-sm text-red-500" style="display: none;"></div>
             </div>
 
             <div>
               <label for="email" class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Pacifico', cursive;">Email Address *</label>
-              <input id="email" name="email" type="email" placeholder="your.email@example.com" required 
+              <input id="email" name="email" type="email" placeholder="your.email@example.com" required oninput="validateField('email')" 
                      class="w-full px-4 py-3 border-2 border-gray-200 bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 hover:border-gray-300" style="font-family: 'Inter', sans-serif; clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);">
+              <div id="emailError" class="mt-1 text-sm text-red-500" style="display: none;"></div>
             </div>
 
             <div>
               <label for="password" class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Pacifico', cursive;">Password *</label>
-              <input id="password" name="password" type="password" placeholder="Create a secure password" required 
+              <input id="password" name="password" type="password" placeholder="Create a secure password" required oninput="checkPasswordStrength()" 
                      class="w-full px-4 py-3 border-2 border-gray-200 bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 hover:border-gray-300" style="font-family: 'Inter', sans-serif; clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);">
+              <div id="passwordMeter" class="mt-2" style="display: none;">
+                <div class="flex items-center gap-2 mb-2">
+                  <div class="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div id="strengthBar" class="h-full transition-all duration-300 rounded-full" style="width: 0%; background-color: #ef4444;"></div>
+                  </div>
+                  <span id="strengthText" class="text-sm font-medium text-red-500">Weak</span>
+                </div>
+              </div>
+              <div id="passwordError" class="mt-1 text-sm text-red-500" style="display: none;"></div>
+            </div>
+
+            <div>
+              <label for="confirmPassword" class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Pacifico', cursive;">Confirm Password *</label>
+              <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Re-enter your password" required oninput="checkPasswordMatch()" 
+                     class="w-full px-4 py-3 border-2 border-gray-200 bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 hover:border-gray-300" style="font-family: 'Inter', sans-serif; clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);">
+              <div id="confirmPasswordError" class="mt-1 text-sm text-red-500" style="display: none;"></div>
             </div>
 
             <div class="sm:col-span-2">
@@ -120,6 +151,28 @@
                 <option value="agri">Agriculture Engineering</option>
                 <option value="aiml">AI/ML Engineering</option>
               </select>
+            </div>
+
+            <div>
+              <label for="semester" class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Pacifico', cursive;">Current Semester *</label>
+              <select id="semester" name="semester" required 
+                      class="w-full px-4 py-3 border-2 border-gray-200 bg-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200 hover:border-gray-300" style="font-family: 'Inter', sans-serif; clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);">
+                <option value="">Select your semester</option>
+                <option value="1">1st Semester</option>
+                <option value="2">2nd Semester</option>
+                <option value="3">3rd Semester</option>
+                <option value="4">4th Semester</option>
+                <option value="5">5th Semester</option>
+                <option value="6">6th Semester</option>
+                <option value="7">7th Semester</option>
+                <option value="8">8th Semester</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="skills" class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Pacifico', cursive;">Skills *</label>
+              <textarea id="skills" name="skills" rows="3" placeholder="List your technical and soft skills (e.g., Python, JavaScript, Communication, Leadership...)" required 
+                        class="w-full px-4 py-3 border-2 border-gray-200 bg-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200 hover:border-gray-300 resize-none" style="font-family: 'Inter', sans-serif; clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);"></textarea>
             </div>
 
             <div>
@@ -179,24 +232,132 @@
   </div>
 
   <script>
-    // Radio button functionality is now handled by default browser behavior
+    function validateField(fieldName) {
+      const field = document.getElementById(fieldName);
+      const errorDiv = document.getElementById(fieldName + 'Error');
+      const value = field.value.trim();
+
+      if (fieldName === 'firstName' || fieldName === 'lastName') {
+        if (value === '') {
+          showError(errorDiv, 'This field is required');
+        } else if (value.length < 2) {
+          showError(errorDiv, 'Must be at least 2 characters');
+        } else {
+          hideError(errorDiv);
+        }
+      } else if (fieldName === 'email') {
+        if (value === '') {
+          showError(errorDiv, 'Email is required');
+        } else if (!value.includes('@') || !value.includes('.')) {
+          showError(errorDiv, 'Please enter a valid email address');
+        } else {
+          hideError(errorDiv);
+        }
+      }
+    }
+
+    function showError(errorDiv, message) {
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
+    }
+
+    function hideError(errorDiv) {
+      errorDiv.style.display = 'none';
+    }
+
+    function checkPasswordStrength() {
+      const password = document.getElementById('password').value;
+      const meterDiv = document.getElementById('passwordMeter');
+      const strengthBar = document.getElementById('strengthBar');
+      const strengthText = document.getElementById('strengthText');
+      const errorDiv = document.getElementById('passwordError');
+
+      if (password.length === 0) {
+        meterDiv.style.display = 'none';
+        hideError(errorDiv);
+        return;
+      }
+
+      meterDiv.style.display = 'block';
+
+      let score = 0;
+      let errors = [];
+
+      // Check requirements
+      if (password.length >= 8) score++; else errors.push('At least 8 characters');
+      if (/[A-Z]/.test(password)) score++; else errors.push('One uppercase letter');
+      if (/[a-z]/.test(password)) score++; else errors.push('One lowercase letter');
+      if (/[0-9]/.test(password)) score++; else errors.push('One number');
+      if (/[@#$%^&*!]/.test(password)) score++; else errors.push('One special character (@#$%^&*!)');
+
+      // Update strength meter
+      if (score <= 2) {
+        strengthBar.style.width = '33%';
+        strengthBar.style.backgroundColor = '#ef4444';
+        strengthText.textContent = 'Weak';
+        strengthText.className = 'text-sm font-medium text-red-500';
+      } else if (score <= 4) {
+        strengthBar.style.width = '66%';
+        strengthBar.style.backgroundColor = '#f59e0b';
+        strengthText.textContent = 'Medium';
+        strengthText.className = 'text-sm font-medium text-yellow-500';
+      } else {
+        strengthBar.style.width = '100%';
+        strengthBar.style.backgroundColor = '#10b981';
+        strengthText.textContent = 'Strong';
+        strengthText.className = 'text-sm font-medium text-green-500';
+      }
+
+      // Show errors if any
+      if (errors.length > 0) {
+        showError(errorDiv, 'Missing: ' + errors.join(', '));
+      } else {
+        hideError(errorDiv);
+      }
+
+      checkPasswordMatch();
+    }
+
+    function checkPasswordMatch() {
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const errorDiv = document.getElementById('confirmPasswordError');
+
+      if (confirmPassword === '') {
+        hideError(errorDiv);
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showError(errorDiv, 'Passwords do not match');
+      } else {
+        hideError(errorDiv);
+      }
+    }
 
     function resetForm() {
       if (confirm('Are you sure you want to reset the form? All data will be lost.')) {
         document.querySelector('form').reset();
-        // Radio buttons will reset automatically with form.reset()
+        document.getElementById('passwordMeter').style.display = 'none';
+        hideError(document.getElementById('passwordError'));
+        hideError(document.getElementById('confirmPasswordError'));
+        hideError(document.getElementById('firstNameError'));
+        hideError(document.getElementById('lastNameError'));
+        hideError(document.getElementById('emailError'));
       }
     }
 
     function validateForm() {
-      let name = document.getElementById("name").value.trim();
+      let firstName = document.getElementById("firstName").value.trim();
+      let lastName = document.getElementById("lastName").value.trim();
       let email = document.getElementById("email").value.trim();
-      let password = document.getElementById("password").value.trim();
+      let password = document.getElementById("password").value;
+      let confirmPassword = document.getElementById("confirmPassword").value;
       let department = document.getElementById("department").value;
       let message = document.getElementById("message").value.trim();
       let agree = document.getElementById("agree").checked;
 
-      if (!name || !email || !password || !department || !message) {
+      if (!firstName || !lastName || !email || !password || !confirmPassword || !department || !message) {
         alert("All required fields must be filled out!");
         return false;
       }
@@ -206,8 +367,14 @@
         return false;
       }
 
-      if (password.length < 6) {
-        alert("Password must be at least 6 characters long!");
+      // Password strength validation
+      if (password.length < 8 || !/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[@#$%^&*!]/.test(password)) {
+        alert("Password does not meet the strength requirements!");
+        return false;
+      }
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
         return false;
       }
 
@@ -221,9 +388,11 @@
 
     // Add loading state to submit button
     document.querySelector('form').addEventListener('submit', function(e) {
-      const submitBtn = document.querySelector('button[type="submit"]');
-      submitBtn.innerHTML = '<svg class="animate-spin w-4 h-4 inline mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Processing...';
-      submitBtn.disabled = true;
+      if (validateForm()) {
+        const submitBtn = document.querySelector('button[type="submit"]');
+        submitBtn.innerHTML = '<svg class="animate-spin w-4 h-4 inline mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Processing...';
+        submitBtn.disabled = true;
+      }
     });
   </script>
 </body>
