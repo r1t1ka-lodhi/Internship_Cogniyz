@@ -1,185 +1,213 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Task Form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Registration Form</title>
+  <link rel="stylesheet" href="/output.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Dancing+Script:wght@400;500;600;700&family=Creepster&display=swap" rel="stylesheet">
   <style>
-    body {
-  margin: 0;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #e8e1ff, #d4c6ff); /* Soft lavender gradient */
-  font-family: 'Poppins', sans-serif;
-}
-
-/* Beautiful Card */
-form {
-  width: 600px;
-  padding: 35px;
-  border-radius: 25px;
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 25px 50px rgba(90, 60, 150, 0.25);
-  animation: fadeIn 0.6s ease-in-out;
-}
-
-/* Title */
-h2 {
-  text-align: center;
-  font-size: 28px;
-  font-weight: 700;
-  color: #4c3a80;
-  margin-bottom: 25px;
-}
-
-/* Inputs, Select, Textarea */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-select,
-textarea {
-  width: 100%;
-  padding: 14px;
-  margin-bottom: 22px;
-  border-radius: 14px;
-  border: 1px solid #c7b9f8;
-  background: rgba(255, 255, 255, 0.85);
-  font-size: 15px;
-  color: #333;
-  outline: none;
-  transition: 0.25s ease;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-select:focus,
-textarea:focus {
-  border-color: #9165e3;
-  box-shadow: 0 0 5px rgba(146, 104, 227, 0.5);
-  background: #ffffff;
-}
-
-/* Radio & Checkbox */
-input[type="radio"],
-input[type="checkbox"] {
-  width: auto;
-  margin-right: 8px;
-  margin-bottom: 8px;
-  accent-color: #7a5ad8;
-}
-
-.option-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 15px;
-  color: #4c3a80;
-}
-
-/* Textarea */
-textarea {
-  resize: none;
-  height: 90px;
-}
-
-/* Button */
-button {
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #8f75e8, #6e52c4);
-  color: white;
-  border: none;
-  border-radius: 14px;
-  font-size: 17px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  transform: translateY(-3px);
-  background: linear-gradient(135deg, #7b63d6, #5c44b3);
-}
-
-/* Fade-in animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-slide-up { animation: slideInUp 0.6s ease-out; }
+    .animate-fade-in { animation: fadeIn 0.8s ease-out; }
+    .section-card { transition: all 0.3s ease; }
+    .section-card:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
   </style>
 </head>
+<body class="min-h-screen py-8 px-4" style="background: radial-gradient(circle, rgba(209, 130, 163, 1) 23%, rgba(148, 187, 233, 1) 100%);">
+  <div class="max-w-4xl mx-auto">
+    <form action="/submit" method="POST" onsubmit="return validateForm()">
+      <% if (typeof error !== 'undefined') { %>
+        <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg animate-slide-up mb-6">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+              </svg>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm text-red-700 font-medium"><%= error %></p>
+            </div>
+          </div>
+        </div>
+      <% } %>
 
-<body>
+      <!-- Single Combined Card with Header -->
+      <section class="section-card bg-gray-100/60 shadow-xl border border-white/60 animate-slide-up p-6" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);">
+        
+        <!-- Header Section -->
+        <div class="bg-white/70 p-6 sm:p-8 rounded-lg shadow-sm mb-4">
+          <div class="text-center">
+            <h1 class="text-3xl sm:text-4xl font-bold mb-2" style="font-family: 'Courgette', cursive; background: linear-gradient(to right, #d21765, #94bbe9); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: 2px;">
+              Your Details
+            </h1>
+            <p class="text-gray-600 text-sm sm:text-base">Complete your profile to get started</p>
+            <div class="w-24 h-1 mx-auto mt-4 rounded-full" style="background: linear-gradient(to right, #d182a3, #94bbe9);"></div>
+          </div>
+        </div>
 
-  <form action="/submit" method="POST" onsubmit="return validateForm()">
-    <h2>Basic Details Form</h2>
+        <!-- Personal Information -->
+        <div class="bg-white/70 p-6 sm:p-8 rounded-lg shadow-sm mb-4">
+          <div class="text-center mb-6">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2" style="font-family: 'Dancing Script', cursive;">Personal Information</h2>
+            <p class="text-gray-600 text-sm">Tell us about yourself</p>
+          </div>
 
-    <!-- Name -->
-    <label for="name">Name:</label><br>
-    <input id="name" name="name" type="text" placeholder="Enter your name" required><br><br>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            <div class="sm:col-span-2">
+              <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
+              <input id="name" name="name" type="text" placeholder="Enter your full name" required 
+                     class="w-full px-4 py-3 border-2 border-gray-200 bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 hover:border-gray-300" style="font-family: 'Inter', sans-serif; clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);">
+            </div>
 
-    <!-- Email -->
-    <label for="email">Email:</label><br>
-    <input id="email" name="email" type="email" placeholder="Enter your email" required><br><br>
+            <div>
+              <label for="email" class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Pacifico', cursive;">Email Address *</label>
+              <input id="email" name="email" type="email" placeholder="your.email@example.com" required 
+                     class="w-full px-4 py-3 border-2 border-gray-200 bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 hover:border-gray-300" style="font-family: 'Inter', sans-serif; clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);">
+            </div>
 
-    <!-- Password -->
-    <label for="password">Password:</label><br>
-    <input id="password" name="password" type="password" placeholder="Create a password" required><br><br>
+            <div>
+              <label for="password" class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Pacifico', cursive;">Password *</label>
+              <input id="password" name="password" type="password" placeholder="Create a secure password" required 
+                     class="w-full px-4 py-3 border-2 border-gray-200 bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 hover:border-gray-300" style="font-family: 'Inter', sans-serif; clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);">
+            </div>
 
-    <!-- Dropdown -->
-    <label for="department">Select Department:</label><br>
-    <select id="department" name="department" required>
-        <option value="">--Choose--</option>
-        <option value="cse">Computer Science</option>
-        <option value="it">Information Technology</option>
-        <option value="ece">Electronics</option>
-        <option value="mech">Mechanical</option>
-    </select>
-    <br><br>
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-semibold text-gray-700 mb-3" style="font-family: 'Pacifico', cursive;">Gender *</label>
+              <div class="flex flex-wrap gap-4">
+                <label class="flex items-center cursor-pointer group">
+                  <input type="radio" id="male" name="gender" value="male" required class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 focus:ring-2 mr-2">
+                  <span class="text-gray-700 group-hover:text-blue-600 transition-colors">Male</span>
+                </label>
+                <label class="flex items-center cursor-pointer group">
+                  <input type="radio" id="female" name="gender" value="female" class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 focus:ring-2 mr-2">
+                  <span class="text-gray-700 group-hover:text-blue-600 transition-colors">Female</span>
+                </label>
+                <label class="flex items-center cursor-pointer group">
+                  <input type="radio" id="other" name="gender" value="other" class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500 focus:ring-2 mr-2">
+                  <span class="text-gray-700 group-hover:text-blue-600 transition-colors">Other</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <!-- Radio buttons -->
-    <label>Gender:</label><br>
-    <input type="radio" id="male" name="gender" value="male" required>
-    <label for="male">Male</label><br>
+        <!-- Professional Information -->
+        <div class="bg-white/70 p-6 sm:p-8 rounded-lg shadow-sm mb-4">
+          <div class="text-center mb-6">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2" style="font-family: 'Dancing Script', cursive;">Professional Information</h2>
+            <p class="text-gray-600 text-sm">Your academic and career details</p>
+          </div>
 
-    <input type="radio" id="female" name="gender" value="female">
-    <label for="female">Female</label><br>
+          <div class="space-y-6">
+            <div>
+              <label for="department" class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Pacifico', cursive;">Department *</label>
+              <select id="department" name="department" required 
+                      class="w-full px-4 py-3 border-2 border-gray-200 bg-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200 hover:border-gray-300" style="font-family: 'Inter', sans-serif; clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);">
+                <option value="">Select your department</option>
+                <option value="cse">Computer Science & Engineering</option>
+                <option value="it">Information Technology</option>
+                <option value="ece">Electronics & Communication</option>
+                <option value="mech">Mechanical Engineering</option>
+                <option value="civil">Civil Engineering</option>
+                <option value="agri">Agriculture Engineering</option>
+                <option value="aiml">AI/ML Engineering</option>
+              </select>
+            </div>
 
-    <input type="radio" id="other" name="gender" value="other">
-    <label for="other">Other</label><br><br>
+            <div>
+              <label for="message" class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: 'Pacifico', cursive;">Professional Summary *</label>
+              <textarea id="message" name="message" rows="4" placeholder="Tell us about your experience, skills, and career goals..." required 
+                        class="w-full px-4 py-3 border-2 border-gray-200 bg-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all duration-200 hover:border-gray-300 resize-none" style="font-family: 'Inter', sans-serif; clip-path: polygon(10px 0%, 100% 0%, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0% 100%, 0% 10px);"></textarea>
+            </div>
+          </div>
+        </div>
 
-    <!-- Checkbox -->
-    <input type="checkbox" id="agree" name="agree" required>
-    <label for="agree">I agree to the terms and conditions</label>
-    <br><br>
+        <!-- Terms and Submit -->
+        <div class="bg-white/70 p-6 sm:p-8 rounded-lg shadow-sm">
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="flex items-center h-5">
+                <input id="agree" name="agree" type="checkbox" required 
+                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="agree" class="text-gray-700" style="font-family: 'Pacifico', cursive;">
+                  I agree to the <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Terms of Service</a> and 
+                  <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Privacy Policy</a> *
+                </label>
+              </div>
+            </div>
 
-    <!-- Textarea -->
-    <label for="message">Your Message:</label><br>
-    <textarea id="message" name="message" rows="4" placeholder="Type something..." required></textarea>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <button type="button" onclick="resetForm()" 
+                      class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 border border-gray-300" style="font-family: 'Inter', sans-serif;">
+                <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                </svg>
+                Reset Form
+              </button>
+              <button type="submit" 
+                      class="flex-1 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl" style="font-family: 'Inter', sans-serif; background: linear-gradient(to right, #d182a3, #94bbe9);" onmouseover="this.style.background='linear-gradient(to right, #c16d92, #7ba8e0)'" onmouseout="this.style.background='linear-gradient(to right, #d182a3, #94bbe9)'">
+                <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+                Submit Registration
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </form>
 
-    <br><br>
+    <!-- Footer -->
+    <footer class="text-center mt-8 animate-fade-in" style="animation-delay: 0.6s">
+      <div class="bg-white/50 backdrop-blur-sm rounded-xl p-4 border border-white/30">
+        <p class="text-gray-600 text-sm">
+          Need help? <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Contact Support</a> | 
+          <a href="/responses" class="text-purple-600 hover:text-purple-800 font-medium">View All Responses</a>
+        </p>
+      </div>
+    </footer>
+  </div>
 
-    <button type="submit">Submit</button>
-  </form>
-
-  <!-- Inline JavaScript for Client-Side Validation -->
   <script>
+    // Radio button functionality is now handled by default browser behavior
+
+    function resetForm() {
+      if (confirm('Are you sure you want to reset the form? All data will be lost.')) {
+        document.querySelector('form').reset();
+        // Radio buttons will reset automatically with form.reset()
+      }
+    }
+
     function validateForm() {
       let name = document.getElementById("name").value.trim();
       let email = document.getElementById("email").value.trim();
       let password = document.getElementById("password").value.trim();
+      let department = document.getElementById("department").value;
+      let message = document.getElementById("message").value.trim();
       let agree = document.getElementById("agree").checked;
 
-      if (!name || !email || !password) {
+      if (!name || !email || !password || !department || !message) {
         alert("All required fields must be filled out!");
         return false;
       }
 
       if (!email.includes("@")) {
-        alert("Invalid email address!");
+        alert("Please enter a valid email address!");
+        return false;
+      }
+
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters long!");
         return false;
       }
 
@@ -190,7 +218,13 @@ button:hover {
 
       return true;
     }
-  </script>
 
+    // Add loading state to submit button
+    document.querySelector('form').addEventListener('submit', function(e) {
+      const submitBtn = document.querySelector('button[type="submit"]');
+      submitBtn.innerHTML = '<svg class="animate-spin w-4 h-4 inline mr-2" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Processing...';
+      submitBtn.disabled = true;
+    });
+  </script>
 </body>
 </html>

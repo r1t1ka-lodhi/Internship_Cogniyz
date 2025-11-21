@@ -8,6 +8,7 @@ const PORT = 5013;
 const submissions = [];
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -23,7 +24,7 @@ app.post("/submit", (req, res) => {
   }
 
   submissions.push({ name, email, password, department, gender, message });
-  res.render("result", { name, email, department, gender  });
+  res.render("result", { name, email, department, gender });
 });
 
 app.get("/responses", (req, res) => {

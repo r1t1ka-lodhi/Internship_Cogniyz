@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>Success</title>
+  <link rel="stylesheet" href="/output.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
  body {
   margin: 0;
@@ -9,8 +11,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #e8e1ff, #d4c6ff); /* Soft lavender gradient */
-  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle, rgba(209, 130, 163, 1) 23%, rgba(148, 187, 233, 1) 100%);
+  font-family: 'Inter', sans-serif;
 }
 
 
@@ -30,6 +32,7 @@
       color: #0b0a0a;
       font-size: 26px;
       font-weight: 500;
+      font-family: 'Poppins', sans-serif;
     }
 
     p {
@@ -43,17 +46,32 @@
       display: inline-block;
       margin-top: 20px;
       padding: 12px 24px;
-      background: linear-gradient(135deg, #4b79a1, #283e51);
       color: white;
       text-decoration: none;
       border-radius: 12px;
       font-weight: 600;
       transition: 0.3s;
+      font-family: 'Inter', sans-serif;
     }
 
     a:hover {
       transform: translateY(-2px);
-      background: linear-gradient(135deg, #395e79, #1d2e3a);
+    }
+    
+    .btn-primary {
+      background: #d182a3;
+    }
+    
+    .btn-primary:hover {
+      background: #c16d92;
+    }
+    
+    .btn-secondary {
+      background: #94bbe9;
+    }
+    
+    .btn-secondary:hover {
+      background: #7ba8e0;
     }
   </style>
 </head>
@@ -67,8 +85,8 @@
     <p><strong>Department:</strong> <%= department %></p>
     <p><strong>Gender:</strong> <%= gender %></p>
 
-    <a href="/">Submit Another</a>
-    <a href="/responses">View All Responses</a>
+    <a href="/" class="btn-primary">Submit Another</a>
+    <a href="/responses" class="btn-secondary">View All Responses</a>
   </div>
 
 </body>
