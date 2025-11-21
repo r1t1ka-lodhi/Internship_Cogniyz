@@ -1,60 +1,53 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>Form Result</title>
+  <title>Success</title>
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d") center/cover no-repeat;
-      backdrop-filter: blur(3px);
-      font-family: 'Poppins', sans-serif;
-    }
+ body {
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #e8e1ff, #d4c6ff); /* Soft lavender gradient */
+  font-family: 'Poppins', sans-serif;
+}
 
-    /* Glass card container */
-    .result-container {
+
+    .container {
       width: 380px;
-      padding: 40px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+      padding: 35px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 25px 50px rgba(90, 60, 150, 0.25);
+  animation: fadeIn 0.6s ease-in-out;
     }
 
-    /* Title */
     h2 {
       margin-bottom: 25px;
-      text-align: center;
-      color: #333;
+      color: #0b0a0a;
       font-size: 26px;
       font-weight: 500;
     }
 
-    /* Result text */
     p {
-      margin-bottom: 15px;
-      font-size: 16px;
       color: #333;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 10px 15px;
-      border-radius: 8px;
+      font-size: 16px;
+      margin: 15px 0;
+      text-align: left;
     }
 
-    /* Back link */
     a {
       display: inline-block;
       margin-top: 20px;
-      padding: 10px 20px;
+      padding: 12px 24px;
       background: linear-gradient(135deg, #4b79a1, #283e51);
       color: white;
       text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
+      border-radius: 12px;
+      font-weight: 600;
       transition: 0.3s;
     }
 
@@ -66,16 +59,17 @@
 </head>
 
 <body>
-  <div class="result-container">
-    <h2>Data Recorded</h2>
-    <p><strong>Name:</strong>
-      <%= name %>
-    </p>
-    <p><strong>Email:</strong>
-      <%= email %>
-    </p>
-    <a href="/">Go Back</a>
-  </div>
-</body>
+  <div class="container">
+    <h2>Submission Successful</h2>
+    
+    <p><strong>Name:</strong> <%= name %></p>
+    <p><strong>Email:</strong> <%= email %></p>
+    <p><strong>Department:</strong> <%= department %></p>
+    <p><strong>Gender:</strong> <%= gender %></p>
 
+    <a href="/">Submit Another</a>
+    <a href="/responses">View All Responses</a>
+  </div>
+
+</body>
 </html>

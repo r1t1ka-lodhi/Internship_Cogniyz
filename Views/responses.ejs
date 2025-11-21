@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Responses</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        .response-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .response-info p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+        
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .delete-btn:hover {
+            background: #c0392b;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .no-responses {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 18px;
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to Form</a>
+        <h1>Form Responses</h1>
+        
+        <% if (responses.length === 0) { %>
+            <div class="no-responses">
+                No responses submitted yet.
+            </div>
+        <% } else { %>
+            <% responses.forEach((response, index) => { %>
+                <div class="response-card">
+                    <div class="response-info">
+                        <p><strong>Name:</strong> <%= response.name %></p>
+                        <p><strong>Email:</strong> <%= response.email %></p>
+                        <p><strong>Department:</strong> <%= response.department %></p>
+                        <p><strong>Gender:</strong> <%= response.gender %></p>
+                        <% if (response.message) { %>
+                            <p><strong>Message:</strong> <%= response.message %></p>
+                        <% } %>
+                    </div>
+                    <form method="POST" action="/delete/<%= index %>" style="display: inline;">
+                        <button type="submit" class="delete-btn" onclick="return confirm('Are you sure you want to delete this response?')">Delete</button>
+                    </form>
+                </div>
+            <% }) %>
+        <% } %>
+    </div>
+</body>
+</html>
